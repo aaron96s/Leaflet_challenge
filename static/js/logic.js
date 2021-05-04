@@ -63,7 +63,7 @@ fillColor = colors.yellow;
 fillColor = colors.blue;}
 
 
-//create readius of markers by level of magnitutde//
+//Create readius of markers by level of magnitutde//
 var earthQuake = L.circleMarker([latitude, longitude], {
 radius: magnitude * 4,
 color: "black",
@@ -81,3 +81,38 @@ earthQuake.bindPopup("<h3> " + "Location: " + eqData[i].properties.place  + "</h
 
 
 }
+//Position Legend//
+var legend = L.control({
+  position: 'bottomright'
+});
+
+
+//Create Function for depth magnitude by color for Legend//
+function getColor(depth) {
+return depth > 90 ? '#581845 ' :
+      depth > 70 ? '#900C3F' :
+      depth > 50 ? '#C70039' :
+      depth > 30 ? '#FF5733' :
+      depth > 10 ? '#FFC300' : 
+      '#3399ff';
+}
+
+
+//Assign legend with colors//
+legend.onAdd = function () {
+var div = L.DomUtil.create('div', 'info legend');
+levels = [0, 10, 30, 50, 70, 90,],
+labels = [];
+    
+div.innerHTML += "<h4 style='text-align: center'>Depth</h4>"
+
+for (var i = 0; i < levels.length; i++) {
+  div.innerHTML += '<i style="background:' + getColor(levels[i] + 1) + '"></i>' + 
+  levels[i] + (levels[i + 1] ? '&ndash;' + levels[i + 1] + '<br>' : '+');
+}
+return div;
+
+};
+
+legend.addTo(myMap);
+})
