@@ -75,4 +75,9 @@ weight: 2
 earthQuake.addTo(myMap);
 
 
- 
+//Append pop-up eartquake info to markers when clicked//
+earthQuake.bindPopup("<h3> " + "Location: " + eqData[i].properties.place  + "</h4><h4> Date: " + new Date(eqData[i].properties.time) + 
+"<br>Magnitude: " + magnitude + "<br> Depth: "+ depth + "</h4>");
+
+
+}
