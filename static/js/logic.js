@@ -22,6 +22,7 @@ accessToken: API_KEY
 var url = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geojson";
 
 
+
 //Call in GeoJson data from website//
 d3.json(url, function (data) {
   var eqData = data.features;
@@ -59,9 +60,19 @@ fillColor = colors.orange;
 fillColor = colors.yellow;
 } 
   else {
-fillColor = colors.blue;};
+fillColor = colors.blue;}
 
-}
+
+//create readius of markers by level of magnitutde//
+var earthQuake = L.circleMarker([latitude, longitude], {
+radius: magnitude * 4,
+color: "black",
+fillColor: fillColor,
+fillOpacity: 1,
+weight: 2
+      });
+
+earthQuake.addTo(myMap);
 
 
  
